@@ -18,6 +18,7 @@
 		008E85E3162F76D100E2740B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 008E85E2162F76D100E2740B /* Default-568h@2x.png */; };
 		008E85E6162F76D100E2740B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 008E85E4162F76D100E2740B /* MainStoryboard.storyboard */; };
 		008E85E9162F76D100E2740B /* BFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008E85E8162F76D100E2740B /* BFIViewController.m */; };
+		008E85F5162F928000E2740B /* Interpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 008E85F4162F928000E2740B /* Interpreter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		008E85E5162F76D100E2740B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		008E85E7162F76D100E2740B /* BFIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFIViewController.h; sourceTree = "<group>"; };
 		008E85E8162F76D100E2740B /* BFIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BFIViewController.m; sourceTree = "<group>"; };
+		008E85F3162F928000E2740B /* Interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interpreter.h; sourceTree = "<group>"; };
+		008E85F4162F928000E2740B /* Interpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interpreter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 		008E85D2162F76D100E2740B /* BrainfuckInterpreter */ = {
 			isa = PBXGroup;
 			children = (
+				008E85F3162F928000E2740B /* Interpreter.h */,
+				008E85F4162F928000E2740B /* Interpreter.m */,
 				008E85DB162F76D100E2740B /* BFIAppDelegate.h */,
 				008E85DC162F76D100E2740B /* BFIAppDelegate.m */,
 				008E85E4162F76D100E2740B /* MainStoryboard.storyboard */,
@@ -177,6 +182,7 @@
 				008E85D9162F76D100E2740B /* main.m in Sources */,
 				008E85DD162F76D100E2740B /* BFIAppDelegate.m in Sources */,
 				008E85E9162F76D100E2740B /* BFIViewController.m in Sources */,
+				008E85F5162F928000E2740B /* Interpreter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
