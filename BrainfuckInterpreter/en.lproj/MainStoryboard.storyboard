@@ -59,6 +59,7 @@
                     </view>
                     <connections>
                         <outlet property="code" destination="fcq-GU-Xfp" id="iXE-ve-hRS"/>
+                        <outlet property="input" destination="xmE-rA-4sn" id="fnP-aR-5fK"/>
                         <outlet property="output" destination="3yy-Y2-kcg" id="S9V-MG-gxN"/>
                     </connections>
                 </viewController>
@@ -67,16 +68,6 @@
             <point key="canvasLocation" x="-5" y="76"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="BFIViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BFIViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pressed:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="code" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="output" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

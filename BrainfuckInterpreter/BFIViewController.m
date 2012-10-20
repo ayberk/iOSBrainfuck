@@ -8,9 +8,11 @@
 
 #import "BFIViewController.h"
 #import "Interpreter.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface BFIViewController ()
-
+// private method goes here
 @end
 
 @implementation BFIViewController
@@ -29,10 +31,18 @@
     return _interpreter;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    code.layer.borderWidth = 1.0f;
+    code.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    [[output layer] setBorderWidth:1.0f];
+    output.layer.borderColor = [[UIColor grayColor] CGColor];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +64,10 @@
     UITouch *touch = [[event allTouches] anyObject];
     if ([code isFirstResponder] && [touch view] != code) {
         [code resignFirstResponder];
+    }
+    
+    if([input isFirstResponder] && [touch view] != input) {
+        [input resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }

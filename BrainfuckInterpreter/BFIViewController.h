@@ -10,9 +10,6 @@
 #import "Interpreter.h"
 
 @interface BFIViewController : UIViewController
-{
-
-}
 
 @property (nonatomic,weak) IBOutlet UITextField *input;
 @property (nonatomic,weak) IBOutlet UITextView *code;
