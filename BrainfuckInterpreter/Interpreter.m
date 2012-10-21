@@ -20,12 +20,39 @@
 @synthesize outputText = _outputText;
 @synthesize inputConsole = _inputConsole;
 
+
+-(void)processChar:(char)c inBuffer:(char*)buffer withIndex:(int*)inputIndex
+{
+    switch (c) {
+        case '+':
+            (*buffer)++;
+            break;
+        case '-':
+            (*buffer)--;
+            break;
+        case '>':
+            buffer++;
+            break;
+        case '<':
+            buffer--;
+            break;
+        case '.':
+            [_outputText appendFormat:@"%c",*buffer];
+        case ',':
+            *buffer = [_inputConsole characterAtIndex:(*inputIndex)++];
+            break;
+        default:
+            break;
+    }
+
+}
+
 -(void)process
 {
     if(!_outputText)
         _outputText = [NSMutableString string];
     else
-        _outputText = [NSMutableString stringWithFormat:@""];
+        _outputText.string = @"";
     
     char program[BUFFER_LEN];
     memset(program,0,sizeof(program));
@@ -37,29 +64,11 @@
     {
         c = [self.inputCode characterAtIndex:i];
         NSLog(@"c === %c buffer == %d",c,*buffer);
-        switch (c) {
-            case '+':
-                (*buffer)++;
-                break;
-            case '-':
-                (*buffer)--;
-                break;
-            case '>':
-                buffer++;
-                break;
-            case '<':
-                buffer--;
-                break;
-            case '.':
-                [_outputText appendFormat:@"%c",*buffer];
-            case ',':
-                *buffer = [_inputConsole characterAtIndex:inputIndex++];
-                break;
-            default:
-                break;
-        }
+        [self processChar:c inBuffer:buffer withIndex:(&inputIndex)];
+        
     }
     
 }
+
 
 @end
