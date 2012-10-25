@@ -59,6 +59,7 @@
     self.output.text = self.interpreter.outputText;
 }
 
+/* close keyboard when focus is lost */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [[event allTouches] anyObject];
