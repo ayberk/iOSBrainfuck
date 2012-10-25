@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#define BUFFER_LEN 256
+
 @interface Interpreter : NSObject
+{
+    
+}
 
 @property (nonatomic, strong) NSString *inputCode;
 @property (nonatomic, strong) NSMutableString *outputText;
@@ -18,6 +23,7 @@
 -(int)popStack;
 
 
+-(void)loop;
 -(void)process;
 -(void)processChar:(char)c;
 

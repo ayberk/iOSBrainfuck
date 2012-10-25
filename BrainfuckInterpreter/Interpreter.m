@@ -8,7 +8,6 @@
 
 #import "Interpreter.h"
 
-#define BUFFER_LEN 256
 
 @interface Interpreter()
 
@@ -16,11 +15,11 @@
 
 @implementation Interpreter
 
-int stack[BUFFER_LEN];
-int stackPointer = -1;
-int pc = 0;
-int inputIndex = 0;
-char *buffer;
+static int stack[BUFFER_LEN];
+static int stackPointer = -1;
+static int pc;
+static int inputIndex;
+static char *buffer;
 
 @synthesize inputCode = _inputCode;
 @synthesize outputText = _outputText;
@@ -33,14 +32,16 @@ char *buffer;
         NSLog(@"Stack overflow");
         return;
     }
-    stack[++stackPointer] = value;
+    //NSLog(@"Pushed to stack");
+    stackPointer+=1;
+    stack[stackPointer] = value;
 }
 
 -(int)popStack
 {
     if(stackPointer < 0 )
     {
-        NSLog(@"Acess to empty stack");
+        NSLog(@"Access to empty stack -- match brackets");
         return -1;
     }
     return stack[stackPointer--];
@@ -52,27 +53,62 @@ char *buffer;
     switch (c) {
         case '+':
             (*buffer)++;
+            pc++;
             break;
         case '-':
             (*buffer)--;
+            pc++;
             break;
         case '>':
             buffer++;
+            pc++;
             break;
         case '<':
             buffer--;
+            pc++;
             break;
         case '.':
             [_outputText appendFormat:@"%c",*buffer];
+            pc++;
+            break;
         case ',':
             *buffer = [_inputConsole characterAtIndex:inputIndex++];
+            pc++;
             break;
         case '[':
-            [self pushStack:pc];
+            if(*buffer)
+            {
+                [self pushStack:pc];
+                pc++;
+                [self loop];
+            }
+            else
+            {
+                char x = [self.inputCode characterAtIndex:pc];
+                while ( x != ']') {
+                    pc++;
+                    x = [self.inputCode characterAtIndex:pc];
+                }
+                pc++;
+            }
+            break;
+        case ']':
+            pc = [self popStack];
+            break;
         default:
+            pc++;
             break;
     }
 
+}
+
+-(void)loop
+{
+    char x;
+    do {
+        x = [self.inputCode characterAtIndex:pc];
+        [self processChar:x];
+    }while (x != ']');
 }
 
 -(void)process
@@ -86,11 +122,12 @@ char *buffer;
     memset(program,0,sizeof(program));
     pc = 0;
     buffer = program;
+    inputIndex = 0;
         
     char c;
-    for(int i = 0; i < [self.inputCode length]; i++)
+    for(pc = 0; pc < [self.inputCode length]; )
     {
-        c = [self.inputCode characterAtIndex:i];
+        c = [self.inputCode characterAtIndex:pc];
         NSLog(@"c === %c buffer == %d",c,*buffer);
         [self processChar:c ];
     }
