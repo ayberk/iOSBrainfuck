@@ -16,12 +16,38 @@
 
 @implementation Interpreter
 
+int stack[BUFFER_LEN];
+int stackPointer = -1;
+int pc = 0;
+int inputIndex = 0;
+char *buffer;
+
 @synthesize inputCode = _inputCode;
 @synthesize outputText = _outputText;
 @synthesize inputConsole = _inputConsole;
 
+-(void)pushStack:(int)value
+{
+    if(stackPointer >= BUFFER_LEN)
+    {
+        NSLog(@"Stack overflow");
+        return;
+    }
+    stack[++stackPointer] = value;
+}
 
--(void)processChar:(char)c inBuffer:(char*)buffer withIndex:(int*)inputIndex
+-(int)popStack
+{
+    if(stackPointer < 0 )
+    {
+        NSLog(@"Acess to empty stack");
+        return -1;
+    }
+    return stack[stackPointer--];
+}
+
+
+-(void)processChar:(char)c
 {
     switch (c) {
         case '+':
@@ -39,8 +65,10 @@
         case '.':
             [_outputText appendFormat:@"%c",*buffer];
         case ',':
-            *buffer = [_inputConsole characterAtIndex:(*inputIndex)++];
+            *buffer = [_inputConsole characterAtIndex:inputIndex++];
             break;
+        case '[':
+            [self pushStack:pc];
         default:
             break;
     }
@@ -56,19 +84,16 @@
     
     char program[BUFFER_LEN];
     memset(program,0,sizeof(program));
-    char *buffer = program;
-    
-    int inputIndex = 0;
+    pc = 0;
+    buffer = program;
+        
     char c;
     for(int i = 0; i < [self.inputCode length]; i++)
     {
         c = [self.inputCode characterAtIndex:i];
         NSLog(@"c === %c buffer == %d",c,*buffer);
-        [self processChar:c inBuffer:buffer withIndex:(&inputIndex)];
-        
+        [self processChar:c ];
     }
-    
 }
-
-
 @end
+

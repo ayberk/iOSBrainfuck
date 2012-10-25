@@ -14,7 +14,12 @@
 @property (nonatomic, strong) NSMutableString *outputText;
 @property (nonatomic, strong) NSString *inputConsole;
 
+-(void)pushStack:(int)value;
+-(int)popStack;
+
+
 -(void)process;
--(void)processChar:(char)c inBuffer:(char*)buffer withIndex:(int*)inputIndex;
+-(void)processChar:(char)c;
+
 
 @end
