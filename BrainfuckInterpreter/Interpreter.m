@@ -71,8 +71,13 @@ static char *buffer;
             [_outputText appendFormat:@"%c",*buffer];
             pc++;
             break;
-        case ',':
-            *buffer = [_inputConsole characterAtIndex:inputIndex++];
+        case ',': 
+            if(inputIndex < [_inputConsole length]) {
+                *buffer = [_inputConsole characterAtIndex:inputIndex++];
+            }
+            else {
+                *buffer = 0;
+            }
             pc++;
             break;
         case '[':
@@ -99,7 +104,7 @@ static char *buffer;
             pc++;
             break;
     }
-
+    
 }
 
 -(void)loop
@@ -123,7 +128,7 @@ static char *buffer;
     pc = 0;
     buffer = program;
     inputIndex = 0;
-        
+    
     char c;
     for(pc = 0; pc < [self.inputCode length]; )
     {
