@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BUFFER_LEN 1000
+#define BUFFER_LEN 10000
 
 @interface Interpreter : NSObject
 {
