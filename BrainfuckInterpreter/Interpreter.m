@@ -90,9 +90,16 @@ static char *buffer;
             else
             {
                 char x = [self.inputCode characterAtIndex:pc];
-                while ( x != ']') {
+                int dummy = 1;
+                while ( x != ']' || dummy) {
                     pc++;
                     x = [self.inputCode characterAtIndex:pc];
+                    if(x == '[') {
+                        dummy++;
+                    }
+                    if(x == ']') {
+                        dummy--;
+                    }
                 }
                 pc++;
             }
@@ -133,8 +140,9 @@ static char *buffer;
     for(pc = 0; pc < [self.inputCode length]; )
     {
         c = [self.inputCode characterAtIndex:pc];
-        NSLog(@"c === %c buffer == %d",c,*buffer);
         [self processChar:c ];
+        NSLog(@"c = %c buffer = %d sp = %d pc = %d",c,*buffer,stackPointer,pc);
+
     }
 }
 @end
